@@ -40,6 +40,7 @@ def load_product(config, product):
 
     check_args = getattr(module, data["check_args"])
     browser_cls = getattr(module, data["browser"])
+    env_cls = getattr(module, data["env"])
     browser_kwargs = getattr(module, data["browser_kwargs"])
     executor_kwargs = getattr(module, data["executor_kwargs"])
     env_options = getattr(module, data["env_options"])()
@@ -54,7 +55,7 @@ def load_product(config, product):
     return (check_args,
             browser_cls, browser_kwargs,
             executor_classes, executor_kwargs,
-            env_options, run_info_extras)
+            env_cls, env_options, run_info_extras)
 
 
 def load_product_update(config, product):

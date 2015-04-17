@@ -25,7 +25,7 @@ from ..executors import executor_kwargs as base_executor_kwargs
 from ..executors.executormarionette import (MarionetteTestharnessExecutor,
                                             MarionetteRefTestExecutor,
                                             MarionetteWdspecExecutor)
-from ..environment import hostnames
+from ..environment import hostnames, LocalServerEnvironment
 
 
 here = os.path.join(os.path.split(__file__)[0])
@@ -36,6 +36,7 @@ __wptrunner__ = {"product": "firefox",
                  "executor": {"testharness": "MarionetteTestharnessExecutor",
                               "reftest": "MarionetteRefTestExecutor",
                               "wdspec": "MarionetteWdspecExecutor"},
+                 "env": "LocalServerEnvironment",
                  "browser_kwargs": "browser_kwargs",
                  "executor_kwargs": "executor_kwargs",
                  "env_options": "env_options",
