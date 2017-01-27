@@ -16,9 +16,6 @@ import errno
 import shutil
 import tempfile
 
-from . import fixtures
-
-
 pytest = None
 
 
@@ -43,10 +40,16 @@ def run(path, session, timeout=0):
     if pytest is None:
         do_delayed_imports()
 
+    # In order to specify a Pytest fixture to that library's programmatic API,
+    # it must be formatted as a Pytest "plugin," necessitating the "-Provider"
+    # wrapper class.
+    class SessionProvider:
+        @pytest.fixture(scope="function")
+        def session(self):
+            return session
+
     recorder = SubtestResultRecorder()
-    plugins = [recorder,
-               fixtures,
-               fixtures.Session(session)]
+    plugins = [recorder, SessionProvider()]
 
     # TODO(ato): Deal with timeouts
 
